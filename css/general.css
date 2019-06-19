@@ -1,0 +1,23 @@
+.web-body {
+    background-color: rgb(230, 233, 239);
+}
+
+.container {
+    background-color:rgb(230, 233, 239);
+}
+
+body {
+    background-color: rgb(230, 233, 239);
+}
+
+.submit-button{
+    padding-top: 1.5%;
+}
+
+#dmenu {
+    height: 50px;
+}
+
+.delete-button{
+    margin-bottom: 0px !important;
+}
