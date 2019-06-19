@@ -1,0 +1,29 @@
+.animal-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+img {
+    max-width: 100%;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #c5c1c1 !important;
+}
+
+#searchInput {
+    margin: 0;
+    font-size: 30px;
+    line-height: 34px;
+    height: 65px;
+    width: 100%;
+    padding-right: 31px;
+    margin-bottom: 31px;
+    box-sizing: border-box;
+    text-indent: 15px;
+    margin-left: 0px;
+}
