@@ -1,0 +1,146 @@
+CREATE TABLE Customer(
+Customer_id char(20) PRIMARY KEY,
+Name char(20),
+Street char(20),
+Postalcode char(6),
+City char(20),
+Province char(20),
+Birthdate date
+);
+
+
+create table Animal(
+   animal_id char(10) PRIMARY KEY,
+   name char(20),
+   age number,
+   gender char(6),
+   breed char(20),
+   donation_date char(30),
+   FOREIGN KEY (breed) REFERENCES Animal_R2 (breed)
+);
+
+create table Animal_R2(
+   breed char(20) PRIMARY KEY,
+   hypoallergenic char(5));
+
+create Table Dog(
+   animal_id char(10) PRIMARY KEY,
+   dewormed char(20),
+   FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
+
+create Table Cat(
+   animal_id char(10) PRIMARY KEY,
+   declawed char(20),
+   FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
+
+create Table Rabbit(
+   animal_id char(10) PRIMARY KEY,
+   overgrownteeth char(20),
+   FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
+
+create Table Room(
+   room_id char(20) PRIMARY KEY,
+   room_size number);
+
+create Table Doctor(
+   doctor_id char(20) PRIMARY KEY,
+   name char(20));
+
+create Table Doctor_R2(
+   doctor_id char(20),
+   animal_id char(10) PRIMARY KEY,
+   FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id) ON DELETE CASCADE,
+   FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE);
+
+create Table Health_Status_Check (
+   health_id char(20) PRIMARY KEY,
+   vaccination char(20),
+   allergies char(20),
+   previous_diseases char(20),
+   doctor_id char(20),
+   FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id) ON DELETE CASCADE);
+
+create Table Drugs_Prescribes(
+   name char(20),
+   doctor_id char(20),
+   dosage number,
+   PRIMARY KEY (name, doctor_id),
+   FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id) ON DELETE CASCADE);
+
+create Table Checks (
+   health_id char(20),
+   doctor_id char(20),
+   animal_id char(10),
+   PRIMARY KEY (health_id,doctor_id, animal_id),
+   FOREIGN KEY (health_id) REFERENCES Health_Status_Check(health_id) ON DELETE CASCADE,
+   FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id) ON DELETE CASCADE,
+   FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE);
+
+create Table Stay_In (
+   room_id char(20),
+   animal_id char(10),
+   PRIMARY KEY (room_id, animal_id),
+   FOREIGN KEY (room_id) REFERENCES Room(room_id) ON DELETE CASCADE,
+   FOREIGN KEY (animal_id) REFERENCES Animal(animal_id) ON DELETE CASCADE);
+
+
+
+
+
+CREATE TABLE Adopter(
+Customer_ID char(20) PRIMARY KEY,
+Preference char(30)
+FOREIGN KEY (Customer_id) REFERENCES Customer (Customer_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Donor(
+Customer_ID char(20) PRIMARY KEY,
+Reason char(30),
+FOREIGN KEY (Customer_id) REFERENCES Customer (Customer_id) ON DELETE CASCADE
+);
+
+CREATE TABLE Administrator(
+AdminID char(20) PRIMARY KEY,
+Name char(20),
+Animal_ID char(20)
+FOREIGN KEY (Animal_id) REFERENCES Animal (Animal_id) ON DELETE CASCADE
+ );
+
+CREATE TABLE Registers(
+AdminID char(20),
+Animal_ID char(20),
+Date date,
+PRIMARY KEY(AdminID, Animal_ID)
+FOREIGN KEY (Admin_id) REFERENCES Administrator (Admin_id) ON DELETE CASCADE,
+FOREIGN KEY (Animal_id) REFERENCES Animal (Animal_id) ON DELETE CASCADE
+);
+
+CREATE TABLE FoodOrders(
+Name char(20) PRIMARY KEY,
+Type char(20),
+Nutrition char(30)
+);
+ 
+CREATE TABLE FoodOrders_R2(
+InvoiceNo integer,
+Name char(20),
+Cost decimal,
+AdminID char(20),
+PRIMARY KEY (InvoiceNo, Name),
+FOREIGN KEY (AdminID) REFERENCES Administrator (AdminID) ON DELETE CASCADE
+);
+ 
+CREATE TABLE FoodOrders_R3(
+InvoiceNo integer,
+Type char(20),
+PRIMARY KEY (InvoiceNo, Type),
+FOREIGN KEY (Type) REFERENCES FoodOrders (Type) ON DELETE CASCADE
+);
+ 
+CREATE TABLE Viewing_Sets(
+ViewingID char(20) PRIMARY KEY,
+CustomerID char(20),
+Date date,
+FOREIGN KEY (CustomerID) REFERENCES CustomerID (CustomerID) ON DELETE CASCADE
+);
+
